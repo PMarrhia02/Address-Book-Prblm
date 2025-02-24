@@ -52,7 +52,7 @@ class Contact:
 
 class AddressBook:
     """
-    A class to manage multiple contacts in an address book.
+    A class to manage multiple contacts using a dictionary.
     """
 
     def __init__(self):
@@ -71,6 +71,18 @@ class AddressBook:
             logging.info(f"Contact added: {full_name}")
             print(f"\nContact '{full_name}' added successfully!\n")
 
+    def delete_contact(self, name):
+        """
+        Delete a contact by name.
+        """
+        if name in self.contacts:
+            del self.contacts[name]
+            logging.info(f"Contact deleted: {name}")
+            print(f"Contact '{name}' deleted successfully!\n")
+        else:
+            logging.warning(f"Attempted to delete non-existent contact: {name}")
+            print(f"Contact '{name}' not found!\n")
+
     def display_contacts(self):
         if not self.contacts:
             logging.info("Displayed Address Book: Empty")
@@ -80,16 +92,6 @@ class AddressBook:
             print("\nYour Address Book:")
             for contact in self.contacts.values():
                 print(contact)
-
-    def delete_contact(self, full_name):
-        """Deletes a contact from the address book."""
-        if full_name in self.contacts:
-            del self.contacts[full_name]
-            logging.info(f"Contact deleted: {full_name}")
-            print(f"\nContact '{full_name}' deleted successfully!\n")
-        else:
-            logging.warning(f"Attempted to delete non-existent contact: {full_name}")
-            print(f"\nContact '{full_name}' not found in Address Book!\n")
 
 
 class AddressBookApp:
@@ -133,6 +135,24 @@ class AddressBookApp:
             print(f"Error: {e}")
             return None
 
+    @staticmethod
+    def add_multiple_contacts(address_book):
+        """Allows user to add multiple contacts in a single session."""
+        while True:
+            contact = AddressBookApp.create_contact()
+            if contact:
+                address_book.add_contact(contact)
+
+            choice = input("Do you want to add another contact? (yes/no): ").strip().lower()
+            if choice != "yes":
+                break
+
+    @staticmethod
+    def delete_contact(address_book):
+        """Deletes a contact based on user input."""
+        name = input("Enter the full name of the contact to delete (First Last): ").strip()
+        address_book.delete_contact(name)
+
 
 def main():
     print("\nWelcome to the Address Book System!\n")
@@ -141,9 +161,10 @@ def main():
     while True:
         print("\nMenu:")
         print("1. Add Contact")
-        print("2. Display Contacts")
+        print("2. Add Multiple Contacts")
         print("3. Delete Contact")
-        print("4. Exit")
+        print("4. Display Contacts")
+        print("5. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -152,11 +173,12 @@ def main():
             if contact:
                 address_book.add_contact(contact)
         elif choice == "2":
-            address_book.display_contacts()
+            AddressBookApp.add_multiple_contacts(address_book)
         elif choice == "3":
-            full_name = input("Enter Full Name of the Contact to Delete: ").strip()
-            address_book.delete_contact(full_name)
+            AddressBookApp.delete_contact(address_book)
         elif choice == "4":
+            address_book.display_contacts()
+        elif choice == "5":
             logging.info("Exiting Address Book Application.")
             print("\nExiting Address Book. Goodbye!\n")
             break
