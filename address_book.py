@@ -2,7 +2,7 @@ import logging
 import os
 import re
 
-# Setup logger to store logs inside the same directory as address_book.py
+# Setup logger to ensure logs are appended to the same file
 script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script directory
 log_file_path = os.path.join(script_dir, "address_book.log")
 
@@ -36,6 +36,15 @@ class Contact:
 
         self.first_name = first_name
         self.last_name = last_name
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zip_code = zip_code
+        self.phone = phone
+        self.email = email
+
+    def update_details(self, address, city, state, zip_code, phone, email):
+        """Update the details of an existing contact."""
         self.address = address
         self.city = city
         self.state = state
@@ -80,6 +89,35 @@ class AddressBook:
             print("\nYour Address Book:")
             for contact in self.contacts.values():
                 print(contact)
+
+    def edit_contact(self, full_name):
+        """Edit an existing contact's details."""
+        if full_name in self.contacts:
+            contact = self.contacts[full_name]
+            print(f"\nEditing Contact: {full_name}")
+
+            contact.address = input("Enter New Address: ").strip()
+            contact.city = input("Enter New City: ").strip()
+            contact.state = input("Enter New State: ").strip()
+
+            contact.zip_code = AddressBookApp.get_validated_input(
+                "Enter New ZIP Code (6 digits): ",
+                r"^\d{6}$", "Invalid ZIP Code! Must be 6 digits."
+            )
+            contact.phone = AddressBookApp.get_validated_input(
+                "Enter New Phone Number (10 or 12 digits): ",
+                r"^\d{10,12}$", "Invalid Phone Number! Must be 10 or 12 digits."
+            )
+            contact.email = AddressBookApp.get_validated_input(
+                "Enter New Email: ",
+                r"^[\w\.-]+@[\w\.-]+\.\w{2,}$", "Invalid Email! Please enter a valid email."
+            )
+
+            logging.info(f"Contact updated: {full_name}")
+            print(f"\nContact '{full_name}' updated successfully!\n")
+        else:
+            logging.warning(f"Attempted to edit non-existent contact: {full_name}")
+            print(f"\nContact '{full_name}' not found in Address Book!\n")
 
 
 class AddressBookApp:
@@ -132,7 +170,8 @@ def main():
         print("\nMenu:")
         print("1. Add Contact")
         print("2. Display Contacts")
-        print("3. Exit")
+        print("3. Edit Contact")
+        print("4. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -143,6 +182,9 @@ def main():
         elif choice == "2":
             address_book.display_contacts()
         elif choice == "3":
+            full_name = input("Enter Full Name of the Contact to Edit: ").strip()
+            address_book.edit_contact(full_name)
+        elif choice == "4":
             logging.info("Exiting Address Book Application.")
             print("\nExiting Address Book. Goodbye!\n")
             break

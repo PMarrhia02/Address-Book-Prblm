@@ -2,3 +2,9 @@
 2025-02-24 22:51:31,024 - ERROR - Invalid Email: p@gmail,com
 2025-02-24 23:09:02,239 - INFO - Address Book Program - Logging started.
 2025-02-24 23:09:42,436 - INFO - Contact added: pp kk
+2025-02-24 23:15:28,344 - INFO - Address Book Program - Logging started.
+2025-02-24 23:15:36,834 - INFO - Displayed Address Book: Empty
+2025-02-24 23:16:00,695 - INFO - Contact added: pp kk
+2025-02-24 23:16:32,989 - INFO - Contact updated: pp kk
+2025-02-24 23:16:35,815 - INFO - Displayed Address Book Contacts
+2025-02-24 23:16:55,313 - INFO - Exiting Address Book Application.
