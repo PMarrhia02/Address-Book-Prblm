@@ -8,3 +8,8 @@
 2025-02-24 23:16:32,989 - INFO - Contact updated: pp kk
 2025-02-24 23:16:35,815 - INFO - Displayed Address Book Contacts
 2025-02-24 23:16:55,313 - INFO - Exiting Address Book Application.
+2025-02-24 23:21:19,315 - INFO - Address Book Program - Logging started.
+2025-02-24 23:21:27,584 - INFO - Displayed Address Book: Empty
+2025-02-24 23:21:49,488 - INFO - Contact added: pp kk
+2025-02-24 23:21:56,364 - INFO - Contact deleted: pp kk
+2025-02-24 23:22:00,353 - INFO - Displayed Address Book: Empty
