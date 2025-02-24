@@ -20,3 +20,5 @@
 2025-02-24 23:29:27,490 - INFO - Contact added: aa ss
 2025-02-24 23:29:34,399 - INFO - Displayed Address Book Contacts
 2025-02-24 23:29:51,094 - INFO - Exiting Address Book Application.
+2025-02-25 00:07:41,216 - INFO - Contact Added: pp kk
+2025-02-25 00:08:01,273 - WARNING - Duplicate Entry Detected: pp kk
