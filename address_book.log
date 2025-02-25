@@ -8,3 +8,9 @@
 2025-02-25 13:24:32,726 - INFO - Address Book 'Contacts' created.
 2025-02-25 13:25:00,536 - INFO - Contact created: pk
 2025-02-25 13:25:00,536 - INFO - Contact 'pk' added to Contacts.
+2025-02-25 14:22:55,162 - INFO - Address Book System - Logging started.
+2025-02-25 14:22:55,163 - INFO - Address Book System initialized.
+2025-02-25 14:24:10,412 - INFO - Address Book 'contact' created.
+2025-02-25 14:24:10,413 - INFO - Address Book 'contact' created.
+2025-02-25 14:24:41,875 - INFO - Contact created: pk mm
+2025-02-25 14:24:41,875 - INFO - Contact 'pk mm' added to contact.
