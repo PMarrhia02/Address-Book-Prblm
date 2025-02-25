@@ -1,27 +1,4 @@
-2025-02-24 22:49:55,992 - INFO - New contact created: pp kk'
-2025-02-24 22:51:31,024 - ERROR - Invalid Email: p@gmail,com
-2025-02-24 23:09:02,239 - INFO - Address Book Program - Logging started.
-2025-02-24 23:09:42,436 - INFO - Contact added: pp kk
-2025-02-24 23:15:28,344 - INFO - Address Book Program - Logging started.
-2025-02-24 23:15:36,834 - INFO - Displayed Address Book: Empty
-2025-02-24 23:16:00,695 - INFO - Contact added: pp kk
-2025-02-24 23:16:32,989 - INFO - Contact updated: pp kk
-2025-02-24 23:16:35,815 - INFO - Displayed Address Book Contacts
-2025-02-24 23:16:55,313 - INFO - Exiting Address Book Application.
-2025-02-24 23:21:19,315 - INFO - Address Book Program - Logging started.
-2025-02-24 23:21:27,584 - INFO - Displayed Address Book: Empty
-2025-02-24 23:21:49,488 - INFO - Contact added: pp kk
-2025-02-24 23:21:56,364 - INFO - Contact deleted: pp kk
-2025-02-24 23:22:00,353 - INFO - Displayed Address Book: Empty
-2025-02-24 23:25:48,110 - INFO - Address Book Program - Logging started.
-2025-02-24 23:27:06,995 - INFO - Exiting Address Book Application.
-2025-02-24 23:27:12,990 - INFO - Address Book Program - Logging started.
-2025-02-24 23:27:39,884 - INFO - Contact added: pp kk
-2025-02-24 23:29:27,490 - INFO - Contact added: aa ss
-2025-02-24 23:29:34,399 - INFO - Displayed Address Book Contacts
-2025-02-24 23:29:51,094 - INFO - Exiting Address Book Application.
-2025-02-25 00:07:41,216 - INFO - Contact Added: pp kk
-2025-02-25 00:08:01,273 - WARNING - Duplicate Entry Detected: pp kk
-2025-02-25 11:47:00,303 - INFO - Address Book System - Logging started.
-2025-02-25 11:47:11,054 - INFO - Created new Address Book: Contacts local
-2025-02-25 11:47:16,925 - INFO - Created new Address Book: Contacts out
+2025-02-25 13:19:13,875 - INFO - Address Book System - Logging started.
+2025-02-25 13:19:38,772 - INFO - Created new Address Book: contacts
+2025-02-25 13:19:46,500 - WARNING - Attempted to add duplicate Address Book: contacts
+2025-02-25 13:20:16,194 - INFO - Added new contact: Name: pk, Phone: 7696368659, City: kkp, State: punjab
