@@ -2,3 +2,9 @@
 2025-02-25 13:19:38,772 - INFO - Created new Address Book: contacts
 2025-02-25 13:19:46,500 - WARNING - Attempted to add duplicate Address Book: contacts
 2025-02-25 13:20:16,194 - INFO - Added new contact: Name: pk, Phone: 7696368659, City: kkp, State: punjab
+2025-02-25 13:24:13,399 - INFO - Address Book System - Logging started.
+2025-02-25 13:24:13,399 - INFO - Address Book System initialized.
+2025-02-25 13:24:32,725 - INFO - Address Book 'Contacts' created.
+2025-02-25 13:24:32,726 - INFO - Address Book 'Contacts' created.
+2025-02-25 13:25:00,536 - INFO - Contact created: pk
+2025-02-25 13:25:00,536 - INFO - Contact 'pk' added to Contacts.
