@@ -1,134 +1,171 @@
 import logging
 import os
-import re
 
-# Setup logger to store logs inside the same directory as the script
-log_filename = os.path.join(os.path.dirname(__file__), "address_book.log")
+# Setup logger to ensure logs are appended to the same file
+script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script directory
+log_file_path = os.path.join(script_dir, "address_book.log")
+
 logging.basicConfig(
-    filename=log_filename,
+    filename=log_file_path,
     filemode='a',
     format='%(asctime)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 
+logging.info("Address Book System - Logging started.")
+
+
 class Contact:
-    """
-    A class to represent a contact with validation and duplicate check.
-    """
-    def __init__(self, first_name, last_name, address, city, state, zip_code, phone, email):
-        if not first_name or not last_name:
-            raise ValueError("First and last name cannot be empty.")
-        if not re.match(r"^\d{6}$", zip_code):
-            raise ValueError("Invalid ZIP code! It must be a 6-digit number.")
-        if not re.match(r"^\d{10,12}$", phone):
-            raise ValueError("Invalid phone number! It must be 10 or 12 digits.")
-        if not re.match(r"^[\w\.-]+@[\w\.-]+\.\w{2,}$", email):
-            raise ValueError("Invalid email format! Example: name@example.com")
-        
-        self.first_name = first_name
-        self.last_name = last_name
-        self.address = address
+    def __init__(self, name, phone, city, state):
+        self.name = name
+        self.phone = phone
         self.city = city
         self.state = state
-        self.zip_code = zip_code
-        self.phone = phone
-        self.email = email
-    
+
     def __eq__(self, other):
-        return isinstance(other, Contact) and self.first_name == other.first_name and self.last_name == other.last_name
+        return isinstance(other, Contact) and self.name.lower() == other.name.lower()
+
+    def __hash__(self):
+        return hash(self.name.lower())
 
     def __str__(self):
-        return (f"Name: {self.first_name} {self.last_name}\n"
-                f"Address: {self.address}, {self.city}, {self.state}, {self.zip_code}\n"
-                f"Phone: {self.phone}\n"
-                f"Email: {self.email}\n")
+        return f"Name: {self.name}, Phone: {self.phone}, City: {self.city}, State: {self.state}"
 
 class AddressBook:
-    """
-    A class to manage multiple contacts in an address book.
-    """
     def __init__(self):
-        self.contacts = []
+        self.contacts = set()  # Using a set to prevent duplicates
 
     def add_contact(self, contact):
         if contact in self.contacts:
-            logging.warning(f"Duplicate Entry Detected: {contact.first_name} {contact.last_name}")
-            print(f"Contact '{contact.first_name} {contact.last_name}' already exists!")
+            print(f" Duplicate entry found: {contact.name}. Cannot add again.")
+            logging.info(f"Attempted to add duplicate contact: {contact.name}")
         else:
-            self.contacts.append(contact)
-            logging.info(f"Contact Added: {contact.first_name} {contact.last_name}")
-            print(f"\nContact '{contact.first_name} {contact.last_name}' added successfully!\n")
-    
+            self.contacts.add(contact)
+            print(f" Contact added successfully: {contact.name}")
+            logging.info(f"Added new contact: {contact}")
+
+    def edit_contact(self, name):
+        for contact in self.contacts:
+            if contact.name.lower() == name.lower():
+                new_phone = input(f"Enter new phone number for {name}: ")
+                new_city = input(f"Enter new city for {name}: ")
+                new_state = input(f"Enter new state for {name}: ")
+                
+                # Update contact details
+                self.contacts.remove(contact)
+                updated_contact = Contact(name, new_phone, new_city, new_state)
+                self.contacts.add(updated_contact)
+
+                print(f" Contact '{name}' updated successfully.")
+                logging.info(f"Edited contact: {updated_contact}")
+                return
+        print(f" Contact '{name}' not found.")
+
+    def delete_contact(self, name):
+        for contact in self.contacts:
+            if contact.name.lower() == name.lower():
+                self.contacts.remove(contact)
+                print(f" Contact '{name}' deleted successfully.")
+                logging.info(f"Deleted contact: {contact.name}")
+                return
+        print(f" Contact '{name}' not found.")
+
     def display_contacts(self):
         if not self.contacts:
-            print("\nAddress Book is empty!\n")
+            print(" No contacts available in this Address Book.")
         else:
-            print("\nYour Address Book:")
+            print("\n Contacts in Address Book:")
             for contact in self.contacts:
                 print(contact)
 
-class AddressBookApp:
-    """
-    Main application interface for user interaction.
-    """
-    @staticmethod
-    def get_validated_input(prompt, pattern, error_message):
-        while True:
-            user_input = input(prompt).strip()
-            if re.match(pattern, user_input):
-                return user_input
-            print(error_message)
+class AddressBookSystem:
+    def __init__(self):
+        self.address_books = {}  # Dictionary to store multiple address books
 
-    @staticmethod
-    def create_contact():
-        try:
-            first_name = input("Enter First Name: ").strip()
-            last_name = input("Enter Last Name: ").strip()
-            address = input("Enter Address: ").strip()
-            city = input("Enter City: ").strip()
-            state = input("Enter State: ").strip()
-            zip_code = AddressBookApp.get_validated_input(
-                "Enter ZIP Code (6 digits): ",
-                r"^\d{6}$", "Invalid ZIP Code! Must be 6 digits."
-            )
-            phone = AddressBookApp.get_validated_input(
-                "Enter Phone Number (10 or 12 digits): ",
-                r"^\d{10,12}$", "Invalid Phone Number! Must be 10 or 12 digits."
-            )
-            email = AddressBookApp.get_validated_input(
-                "Enter Email: ",
-                r"^[\w\.-]+@[\w\.-]+\.\w{2,}$", "Invalid Email! Please enter a valid email."
-            )
+    def add_address_book(self, book_name):
+        if book_name in self.address_books:
+            print(f" Address Book '{book_name}' already exists.")
+            logging.info(f"Attempted to add duplicate Address Book: {book_name}")
+        else:
+            self.address_books[book_name] = AddressBook()
+            print(f" Address Book '{book_name}' created successfully.")
+            logging.info(f"Created new Address Book: {book_name}")
 
-            return Contact(first_name, last_name, address, city, state, zip_code, phone, email)
-        except ValueError as e:
-            logging.error(f"Error: {e}")
-            print(f"Error: {e}")
-            return None
+    def get_address_book(self, book_name):
+        return self.address_books.get(book_name, None)
 
-def main():
-    print("\nWelcome to the Address Book System!\n")
-    address_book = AddressBook()
+    def display_address_books(self):
+        if not self.address_books:
+            print(" No Address Books available.")
+        else:
+            print("\n Available Address Books:")
+            for book_name in self.address_books.keys():
+                print(f"- {book_name}")
+
+# Main Execution
+if __name__ == "__main__":
+    system = AddressBookSystem()
 
     while True:
-        print("\nMenu:")
-        print("1. Add Contact")
-        print("2. Display Contacts")
-        print("3. Exit")
-
-        choice = input("Enter your choice: ").strip()
+        print("\n🔹 Address Book System Menu 🔹")
+        print("1️ Add New Address Book")
+        print("2️ Add Contact to Address Book")
+        print("3️ Edit Contact")
+        print("4️ Delete Contact")
+        print("5️ Display Contacts in an Address Book")
+        print("6️ Display All Address Books")
+        print("7️ Exit")
+        
+        choice = input("Enter your choice: ")
 
         if choice == "1":
-            contact = AddressBookApp.create_contact()
-            if contact:
-                address_book.add_contact(contact)
-        elif choice == "2":
-            address_book.display_contacts()
-        elif choice == "3":
-            print("\nExiting Address Book. Goodbye!\n")
-            break
-        else:
-            print("Invalid choice! Please select a valid option.")
+            book_name = input("Enter Address Book name: ")
+            system.add_address_book(book_name)
 
-if __name__ == "__main__":
-    main()
+        elif choice == "2":
+            book_name = input("Enter Address Book name: ")
+            book = system.get_address_book(book_name)
+            if book:
+                name = input("Enter Name: ")
+                phone = input("Enter Phone Number: ")
+                city = input("Enter City: ")
+                state = input("Enter State: ")
+                book.add_contact(Contact(name, phone, city, state))
+            else:
+                print(f" Address Book '{book_name}' not found.")
+
+        elif choice == "3":
+            book_name = input("Enter Address Book name: ")
+            book = system.get_address_book(book_name)
+            if book:
+                name = input("Enter Name of Contact to Edit: ")
+                book.edit_contact(name)
+            else:
+                print(f" Address Book '{book_name}' not found.")
+
+        elif choice == "4":
+            book_name = input("Enter Address Book name: ")
+            book = system.get_address_book(book_name)
+            if book:
+                name = input("Enter Name of Contact to Delete: ")
+                book.delete_contact(name)
+            else:
+                print(f" Address Book '{book_name}' not found.")
+
+        elif choice == "5":
+            book_name = input("Enter Address Book name: ")
+            book = system.get_address_book(book_name)
+            if book:
+                book.display_contacts()
+            else:
+                print(f" Address Book '{book_name}' not found.")
+
+        elif choice == "6":
+            system.display_address_books()
+
+        elif choice == "7":
+            print(" Exiting Address Book System. Goodbye! 🔻")
+            break
+
+        else:
+            print(" Invalid choice. Please enter a valid option.")

@@ -22,3 +22,6 @@
 2025-02-24 23:29:51,094 - INFO - Exiting Address Book Application.
 2025-02-25 00:07:41,216 - INFO - Contact Added: pp kk
 2025-02-25 00:08:01,273 - WARNING - Duplicate Entry Detected: pp kk
+2025-02-25 11:47:00,303 - INFO - Address Book System - Logging started.
+2025-02-25 11:47:11,054 - INFO - Created new Address Book: Contacts local
+2025-02-25 11:47:16,925 - INFO - Created new Address Book: Contacts out
