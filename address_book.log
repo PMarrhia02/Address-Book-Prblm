@@ -14,3 +14,24 @@
 2025-02-25 14:24:10,413 - INFO - Address Book 'contact' created.
 2025-02-25 14:24:41,875 - INFO - Contact created: pk mm
 2025-02-25 14:24:41,875 - INFO - Contact 'pk mm' added to contact.
+2025-02-25 14:30:05,948 - INFO - Address Book System - Logging started.
+2025-02-25 14:30:05,949 - INFO - Address Book System initialized.
+2025-02-25 14:30:30,039 - INFO - No Address Books available.
+2025-02-25 14:30:38,682 - INFO - Address Book 'contact' created.
+2025-02-25 14:30:38,683 - INFO - Address Book 'contact' created.
+2025-02-25 14:31:13,008 - INFO - Contact created: pp kk
+2025-02-25 14:31:13,008 - INFO - Contact 'pp kk' added to contact.
+2025-02-25 14:32:46,758 - INFO - Address Book System - Logging started.
+2025-02-25 14:32:46,758 - INFO - Address Book System initialized.
+2025-02-25 14:33:17,264 - INFO - Address Book 'c' created.
+2025-02-25 14:33:17,265 - INFO - Address Book 'c' created.
+2025-02-25 14:33:40,411 - INFO - Contact created: p k
+2025-02-25 14:33:40,411 - INFO - Contact 'p k' added to c.
+2025-02-25 14:33:43,563 - INFO - Displayed Address Book: c
+2025-02-27 10:00:36,600 - INFO - Address Book System - Logging started.
+2025-02-27 10:00:36,603 - INFO - Address Book System - Logging started.
+2025-02-27 10:00:36,604 - INFO - Address Book System initialized.
+2025-02-27 10:01:58,634 - INFO - Address Book 'contact' created.
+2025-02-27 10:01:58,635 - INFO - Address Book 'contact' created.
+2025-02-27 10:02:54,731 - INFO - Contact created: Prikshit marrhia
+2025-02-27 10:02:54,732 - INFO - Contact 'Prikshit marrhia' added to contact.

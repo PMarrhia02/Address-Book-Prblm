@@ -1,6 +1,7 @@
-import re 
+import re
 import logging
 import os
+
 
 # Setup logger to ensure logs are appended to the same file
 script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script directory
@@ -16,26 +17,12 @@ logging.basicConfig(
 logging.info("Address Book System - Logging started.")
 
 
+logging.info("Address Book System - Logging started.")
+
 class Contact:
     """
     Description:
         Represents a contact in an address book with personal details.
-
-    Parameters:
-        first_name - First name of the contact.
-        last_name -Last name of the contact.
-        phone - Phone number of the contact.
-        email - Email address of the contact.
-        address - Street address of the contact.
-        city - City where the contact resides.
-        state - State where the contact resides.
-        zip_code - 6-digit postal code of the contact.
-
-    Returns:
-        None
-
-    Raises:
-        ValueError: If first_name or last_name is empty, phone is invalid, email format is incorrect, or zip_code is not 6 digits.
     """
     def __init__(self, first_name, last_name, phone, email, address, city, state, zip_code):
         if not first_name or not last_name:
@@ -61,10 +48,8 @@ class Contact:
         """
         Description:
             Checks equality between two contacts based on first and last names (case insensitive).
-        
         Parameters:
             other (Contact): Another contact to compare.
-        
         Returns:
             bool: True if first and last names match (case insensitive), False otherwise.
         """
@@ -77,7 +62,6 @@ class Contact:
         """
         Description:
             Defines a unique hash for a contact based on its first and last names.
-        
         Returns:
             int: Hash of the contact's first and last names.
         """
@@ -87,7 +71,6 @@ class Contact:
         """
         Description:
             Returns a formatted string representation of the contact.
-        
         Returns:
             str: Formatted contact details.
         """
@@ -97,12 +80,6 @@ class AddressBook:
     """
     Description:
         Represents an address book that stores multiple contacts.
-
-    Parameters:
-        book_name (str): Name of the address book.
-
-    Returns:
-        None
     """
     def __init__(self, book_name):
         self.book_name = book_name
@@ -112,8 +89,7 @@ class AddressBook:
     def add_contact(self, first_name, last_name, phone, email, address, city, state, zip_code):
         """
         Description:
-            Adds a new contact to the address book if it does not already exist.
-        
+            Adds a new contact to the address book if it does not already exist. 
         Parameters:
             first_name - First name of the contact.
             last_name -Last name of the contact.
@@ -122,13 +98,9 @@ class AddressBook:
             address - Street address.
             city - City.
             state - State.
-            zip_code - 6-digit postal code.
-
+            zip_code - 6-digit postal code
         Returns:
             None
-
-        Raises:
-            ValueError: If contact details are invalid.
         """
         try:
             contact = Contact(first_name, last_name, phone, email, address, city, state, zip_code)
@@ -146,7 +118,6 @@ class AddressBook:
         """
         Description:
             Displays all contacts in the address book.
-        
         Returns:
             None
         """
@@ -163,12 +134,10 @@ class AddressBook:
         """
         Description:
             Edits an existing contact in the address book.
-        
         Parameters:
             first_name (str): First name of the contact to be edited.
             last_name (str): Last name of the contact to be edited.
             updated_contact (Contact): Updated contact object.
-        
         Returns:
             None
         """
@@ -191,11 +160,9 @@ class AddressBook:
         """
         Description:
             Deletes a contact from the address book.
-
         Parameters:
             first_name - First name of the contact to be deleted.
             last_name - Last name of the contact to be deleted.
-        
         Returns:
             None
         """
@@ -217,9 +184,6 @@ class AddressBookSystem:
     """
     Description:
         Manages multiple address books.
-
-    Returns:
-        None
     """
     def __init__(self):
         self.address_books = {}
@@ -229,10 +193,8 @@ class AddressBookSystem:
         """
         Description:
             Creates a new address book if it does not already exist.
-        
         Parameters:
             book_name (str): Name of the address book.
-        
         Returns:
             None
         """
@@ -248,10 +210,8 @@ class AddressBookSystem:
         """
         Description:
             Retrieves an address book by name.
-        
         Parameters:
             book_name (str): Name of the address book.
-        
         Returns:
             AddressBook: The requested address book or None if not found.
         """
@@ -261,7 +221,6 @@ class AddressBookSystem:
         """
         Description:
             Displays all available address books.
-        
         Returns:
             None
         """
@@ -278,10 +237,8 @@ class AddressBookSystem:
         """
         Description:
             Searches for contacts based on city across multiple address books.
-
         Parameters:
             city (str, optional): City to search.
-
         Returns:
             None
         """
@@ -304,10 +261,8 @@ class AddressBookSystem:
         """
         Description:
             Searches for contacts based on state across multiple address books.
-
         Parameters:
             state (str, optional): State to search.
-
         Returns:
             None
         """
@@ -330,9 +285,6 @@ def main():
     """
     Description:
         Main function that provides a menu-driven interface for the address book system.
-    
-    Returns:
-        None
     """
     system = AddressBookSystem()
     
@@ -418,6 +370,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
