@@ -3,8 +3,6 @@ import logging
 import os
 from collections import Counter
 
-
-
 # Setup logger to ensure logs are appended to the same file
 script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script directory
 log_file_path = os.path.join(script_dir, "address_book.log")
@@ -18,7 +16,6 @@ logging.basicConfig(
 
 logging.info("Address Book System - Logging started.")
 
-
 class Contact:
     """
     Description:
@@ -26,19 +23,18 @@ class Contact:
     """
     def __init__(self, first_name, last_name, phone, email, address, city, state, zip_code):
         """
-    Initializes a new Contact object with the given details.
+        Initializes a new Contact object with the given details.
 
-    Parameters:
-        first_name (str): The first name of the contact.
-        last_name (str): The last name of the contact.
-        phone (str): The contact's phone number (10 or 12 digits).
-        email (str): The contact's email address.
-        address (str): The contact's street address.
-        city (str): The city where the contact resides.
-        state (str): The state where the contact resides.
-        zip_code (str): The postal ZIP code (must be exactly 6 digits).
+        Parameters:
+            first_name (str): The first name of the contact.
+            last_name (str): The last name of the contact.
+            phone (str): The contact's phone number (10 or 12 digits).
+            email (str): The contact's email address.
+            address (str): The contact's street address.
+            city (str): The city where the contact resides.
+            state (str): The state where the contact resides.
+            zip_code (str): The postal ZIP code (must be exactly 6 digits).
         """
-
         if not first_name or not last_name:
             raise ValueError("First name and last name cannot be empty.")
         if not re.match(r"^\d{10,12}$", phone):
@@ -197,6 +193,24 @@ class AddressBook:
         except Exception as e:
             logging.error(f"Error deleting contact: {e}")
             print(f"Error deleting contact: {e}")
+
+    def sort_contacts(self):
+        """
+        Description:
+            Sorts the contacts alphabetically by name and displays them.
+        Returns:
+            None
+        """
+        if not self.contacts:
+            print(f"{self.book_name} Address Book is empty. No contacts to sort.")
+            logging.info(f"Sorting attempted on empty address book: {self.book_name}")
+            return
+
+        sorted_contacts = sorted(self.contacts, key=lambda x: (x.first_name.lower(), x.last_name.lower()))
+        print(f"\nSorted Contacts in {self.book_name}:")
+        for contact in sorted_contacts:
+            print(contact)
+        logging.info(f"Sorted contacts alphabetically in {self.book_name}")
 
 class AddressBookSystem:
     """
@@ -363,10 +377,11 @@ def main():
         print("4. Display All Address Books")
         print("5. Search Person by City")
         print("6. Search Person by State")
-        print("7. Edit Contact")
-        print("8. Delete Contact")
-        print("9. Count Contacts by City and State")
-        print("10. Exit")
+        print("7. Sort By Name")
+        print("8. Edit Contact")
+        print("9. Delete Contact")
+        print("10. Count Contacts by City and State")
+        print("11. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -407,6 +422,13 @@ def main():
             book_name = input("Enter Address Book name: ").strip()
             address_book = system.get_address_book(book_name)
             if address_book:
+                address_book.sort_contacts()
+            else:
+                print(f"Address Book '{book_name}' does not exist!")
+        elif choice == "8":
+            book_name = input("Enter Address Book name: ").strip()
+            address_book = system.get_address_book(book_name)
+            if address_book:
                 first_name = input("Enter the first name of the contact to edit: ").strip()
                 last_name = input("Enter the last name of the contact to edit: ").strip()
                 new_first_name = input("Enter New First Name: ").strip()
@@ -421,7 +443,7 @@ def main():
                 address_book.edit_contact(first_name, last_name, updated_contact)
             else:
                 print(f"Address Book '{book_name}' does not exist!")
-        elif choice == "8":
+        elif choice == "9":
             book_name = input("Enter Address Book name: ").strip()
             address_book = system.get_address_book(book_name)
             if address_book:
@@ -430,14 +452,13 @@ def main():
                 address_book.delete_contact(first_name, last_name)
             else:
                 print(f"Address Book '{book_name}' does not exist!")
-        elif choice == "9":
-            system.count_contacts_by_city_and_state()
         elif choice == "10":
+            system.count_contacts_by_city_and_state()
+        elif choice == "11":
             print("Exiting...")
             break
         else:
             print("Invalid choice. Please try again.")
-
 
 if __name__ == "__main__":
     main()

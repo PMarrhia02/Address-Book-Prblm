@@ -50,3 +50,29 @@
 2025-02-27 10:31:27,955 - INFO - Contact 'pp kk' added to c1.
 2025-02-27 10:32:14,538 - INFO - Contact created: kk pp
 2025-02-27 10:32:14,538 - INFO - Contact 'kk pp' added to c1.
+2025-02-27 10:53:42,069 - INFO - Address Book System - Logging started.
+2025-02-27 10:53:55,825 - INFO - Address Book System - Logging started.
+2025-02-27 10:54:36,030 - INFO - Address Book System - Logging started.
+2025-02-27 10:57:11,807 - INFO - Address Book System - Logging started.
+2025-02-27 10:57:24,307 - INFO - Address Book System - Logging started.
+2025-02-27 11:09:06,571 - INFO - Address Book System - Logging started.
+2025-02-27 11:09:26,889 - INFO - Added contact: pp
+2025-02-27 11:09:49,368 - WARNING - Search failed for '6' - Not found.
+2025-02-27 11:09:52,072 - INFO - Sorted contacts alphabetically.
+2025-02-27 11:10:11,223 - INFO - Added contact: kk
+2025-02-27 11:10:16,743 - INFO - Sorted contacts alphabetically.
+2025-02-27 11:13:35,879 - WARNING - Invalid menu choice entered: python -u "c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\address_book.py"
+2025-02-27 11:15:23,225 - INFO - User exited the address book application.
+2025-02-27 11:15:25,909 - INFO - Address Book System - Logging started.
+2025-02-27 11:15:25,909 - INFO - Address Book System initialized.
+2025-02-27 11:27:41,304 - INFO - Address Book System - Logging started.
+2025-02-27 11:27:41,305 - INFO - Address Book System initialized.
+2025-02-27 11:33:14,946 - INFO - Address Book System - Logging started.
+2025-02-27 11:33:14,947 - INFO - Address Book System initialized.
+2025-02-27 11:33:41,641 - INFO - Address Book 'c1' created.
+2025-02-27 11:33:41,642 - INFO - Address Book 'c1' created.
+2025-02-27 11:34:08,541 - INFO - Contact created: pp kk
+2025-02-27 11:34:08,541 - INFO - Contact 'pp kk' added to c1.
+2025-02-27 11:34:33,621 - INFO - Contact created: kk pp
+2025-02-27 11:34:33,621 - INFO - Contact 'kk pp' added to c1.
+2025-02-27 11:34:39,398 - INFO - Sorted contacts alphabetically in c1
