@@ -76,3 +76,46 @@
 2025-02-27 11:34:33,621 - INFO - Contact created: kk pp
 2025-02-27 11:34:33,621 - INFO - Contact 'kk pp' added to c1.
 2025-02-27 11:34:39,398 - INFO - Sorted contacts alphabetically in c1
+2025-02-28 10:03:44,517 - INFO - Address Book System - Logging started.
+2025-02-28 10:03:44,518 - INFO - Contact Manager started
+2025-02-28 10:04:02,966 - WARNING - Collection 'c1' not found
+2025-02-28 10:07:24,562 - WARNING - Invalid choice: python -u "c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\address_book.py"
+2025-02-28 10:07:28,016 - INFO - Program exited
+2025-02-28 10:17:58,524 - INFO - Address Book System - Logging started.
+2025-02-28 10:17:58,525 - INFO - Contact Manager started
+2025-02-28 10:18:09,861 - INFO - Created collection: C1
+2025-02-28 10:18:17,277 - ERROR - Error adding person: Collection 'c1' not found
+2025-02-28 10:18:21,398 - ERROR - Error adding person: Collection 'c1' not found
+2025-02-28 10:18:50,863 - INFO - Program exited
+2025-02-28 10:27:09,655 - INFO - Address Book System - Logging started.
+2025-02-28 10:27:09,656 - INFO - Address Book System initialized.
+2025-02-28 10:27:15,365 - INFO - Address Book 'c1' created.
+2025-02-28 10:27:15,366 - INFO - Address Book 'c1' created.
+2025-02-28 10:27:38,698 - INFO - Contact created: pp kk
+2025-02-28 10:27:38,698 - INFO - Contact 'pp kk' added to c1.
+2025-02-28 10:27:45,566 - INFO - Displayed sorted contact: pp kk
+2025-02-28 10:27:57,002 - INFO - Displayed sorted contact: pp kk
+2025-02-28 10:28:25,203 - INFO - Contact created: pk mm
+2025-02-28 10:28:25,203 - INFO - Contact 'pk mm' added to c1.
+2025-02-28 10:28:28,671 - INFO - Displayed sorted contact: pk mm
+2025-02-28 10:28:28,672 - INFO - Displayed sorted contact: pp kk
+2025-02-28 10:29:29,173 - INFO - Address Book System - Logging started.
+2025-02-28 10:29:29,173 - INFO - Address Book System initialized.
+2025-02-28 10:29:41,960 - INFO - Address Book 'c1' created.
+2025-02-28 10:29:41,961 - INFO - Address Book 'c1' created.
+2025-02-28 10:30:05,807 - INFO - Contact created: pk mm
+2025-02-28 10:30:05,807 - INFO - Contact 'pk mm' added to c1.
+2025-02-28 10:30:35,398 - ERROR - Error adding contact: Phone number must be 10 or 12 digits long.
+2025-02-28 10:30:40,776 - INFO - Displayed sorted contact: pk mm
+2025-02-28 10:31:19,778 - INFO - Address Book System - Logging started.
+2025-02-28 10:31:19,779 - INFO - Address Book System initialized.
+2025-02-28 10:31:32,347 - INFO - Address Book 'c1' created.
+2025-02-28 10:31:32,348 - INFO - Address Book 'c1' created.
+2025-02-28 10:31:53,400 - INFO - Contact created: pp kk
+2025-02-28 10:31:53,400 - INFO - Contact 'pp kk' added to c1.
+2025-02-28 10:32:18,520 - INFO - Contact created: gg hh
+2025-02-28 10:32:18,520 - INFO - Contact 'gg hh' added to c1.
+2025-02-28 10:32:24,359 - INFO - Displayed sorted contact: gg hh
+2025-02-28 10:32:24,359 - INFO - Displayed sorted contact: pp kk
+2025-02-28 10:35:01,072 - INFO - Address Book System - Logging started.
+2025-02-28 10:35:01,072 - INFO - Address Book System initialized.
