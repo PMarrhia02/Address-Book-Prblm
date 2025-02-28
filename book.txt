@@ -1,0 +1,6 @@
+Carol,Williams,5556667777,carol.w@email.com,789 Oak St,Chicago,IL,606001
+pp,mm,1234567890,p@gmail.com,aa,cc,ss,151204
+David,Brown,4445556666,david.brown@email.com,321 Pine St,New York,NY,100002
+Alice,Smith,1234567890,alice.smith@email.com,123 Main St,New York,NY,100001
+Eve,Adams,3334445555,eve.adams@email.com,654 Birch St,Los Angeles,CA,900002
+Bob,Johnson,9876543210,bob.johnson@email.com,456 Elm St,Los Angeles,CA,900001

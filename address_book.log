@@ -119,3 +119,81 @@
 2025-02-28 10:32:24,359 - INFO - Displayed sorted contact: pp kk
 2025-02-28 10:35:01,072 - INFO - Address Book System - Logging started.
 2025-02-28 10:35:01,072 - INFO - Address Book System initialized.
+2025-02-28 10:43:22,917 - INFO - Address Book System - Logging started.
+2025-02-28 10:43:22,917 - INFO - Contact Manager started
+2025-02-28 10:43:37,288 - INFO - Created collection: c1
+2025-02-28 10:44:17,723 - INFO - Program terminated by user
+2025-02-28 10:44:20,694 - INFO - Address Book System - Logging started.
+2025-02-28 10:44:20,694 - INFO - Contact Manager started
+2025-02-28 10:44:24,825 - INFO - Created collection: c1
+2025-02-28 10:44:54,244 - INFO - Added pp ll to c1
+2025-02-28 10:44:57,917 - INFO - Listed: pp ll - cc, ss
+2025-02-28 10:45:10,895 - INFO - Address book saved to 'address_book.txt'
+2025-02-28 10:45:16,451 - INFO - Address book loaded from 'address_book.txt'
+2025-02-28 10:51:45,512 - INFO - Program exited
+2025-02-28 10:51:47,694 - INFO - Contact Manager started
+2025-02-28 10:51:54,187 - INFO - Created collection: c1
+2025-02-28 10:52:24,926 - ERROR - Error adding person: Zip code must be 5 digits
+2025-02-28 10:53:25,428 - INFO - Program terminated by user
+2025-02-28 10:53:27,740 - INFO - Contact Manager started
+2025-02-28 10:53:30,112 - INFO - Created collection: c1
+2025-02-28 10:54:05,573 - INFO - Added pp kk to c1
+2025-02-28 10:54:10,080 - ERROR - Error listing people: Collection 'C1' not found
+2025-02-28 10:54:20,911 - INFO - Listed: pp kk - CC, SS
+2025-02-28 10:54:35,736 - INFO - Address book saved to 'c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\address_book.txt'
+2025-02-28 10:55:39,252 - INFO - Address book loaded from 'c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\address_book.txt'
+2025-02-28 11:01:34,263 - INFO - Program exited
+2025-02-28 11:02:21,135 - INFO - Address Book System initialized.
+2025-02-28 11:02:32,826 - INFO - Address Book 'c1' created.
+2025-02-28 11:02:32,827 - INFO - Address Book 'c1' created.
+2025-02-28 11:03:04,560 - INFO - Contact created: prikshit Marrhia
+2025-02-28 11:03:04,561 - INFO - Contact 'prikshit Marrhia' added to c1.
+2025-02-28 11:03:10,019 - INFO - Displayed contact: prikshit Marrhia
+2025-02-28 11:06:55,107 - INFO - Address Book System - Logging started.
+2025-02-28 11:06:55,108 - INFO - Address Book System initialized.
+2025-02-28 11:07:18,633 - INFO - Address Book 'c1' created.
+2025-02-28 11:07:18,634 - INFO - Address Book 'c1' created.
+2025-02-28 11:07:41,097 - INFO - Contact created: prikshit marrhia
+2025-02-28 11:07:41,097 - INFO - Contact 'prikshit marrhia' added to c1.
+2025-02-28 11:07:49,909 - INFO - Displayed contact: prikshit marrhia
+2025-02-28 11:10:09,068 - INFO - Address Book System - Logging started.
+2025-02-28 11:10:09,069 - INFO - Address Book System initialized.
+2025-02-28 11:10:18,755 - INFO - Address Book 'c1' created.
+2025-02-28 11:10:18,756 - INFO - Address Book 'c1' created.
+2025-02-28 11:10:44,385 - INFO - Contact created: prikshit marrhia
+2025-02-28 11:10:44,385 - INFO - Contact 'prikshit marrhia' added to c1.
+2025-02-28 11:10:48,708 - INFO - Displayed contact: prikshit marrhia
+2025-02-28 11:11:05,851 - INFO - Saved c1 to c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\book.txt
+2025-02-28 11:11:48,528 - INFO - Address Book System - Logging started.
+2025-02-28 11:11:48,529 - INFO - Address Book System initialized.
+2025-02-28 11:12:16,370 - INFO - Address Book 'c1' created.
+2025-02-28 11:12:16,371 - INFO - Address Book 'c1' created.
+2025-02-28 11:12:36,447 - INFO - Saved c1 to c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\book.txt
+2025-02-28 11:12:55,803 - INFO - Loaded c1 from c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\book.txt
+2025-02-28 11:13:28,275 - INFO - c1 Address Book is empty.
+2025-02-28 11:14:15,412 - INFO - Contact created: Alice Smith
+2025-02-28 11:14:15,412 - INFO - Contact 'Alice Smith' added to c1.
+2025-02-28 11:14:15,413 - INFO - Contact created: Bob Johnson
+2025-02-28 11:14:15,414 - INFO - Contact 'Bob Johnson' added to c1.
+2025-02-28 11:14:15,415 - INFO - Contact created: Carol Williams
+2025-02-28 11:14:15,415 - INFO - Contact 'Carol Williams' added to c1.
+2025-02-28 11:14:15,416 - INFO - Contact created: David Brown
+2025-02-28 11:14:15,417 - INFO - Contact 'David Brown' added to c1.
+2025-02-28 11:14:15,418 - INFO - Contact created: Eve Adams
+2025-02-28 11:14:15,419 - INFO - Contact 'Eve Adams' added to c1.
+2025-02-28 11:14:15,420 - INFO - Loaded c1 from c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\book.txt
+2025-02-28 11:14:59,253 - INFO - Contact created: pp mm
+2025-02-28 11:14:59,254 - INFO - Contact 'pp mm' added to c1.
+2025-02-28 11:15:04,897 - INFO - Displayed contact: Carol Williams
+2025-02-28 11:15:04,898 - INFO - Displayed contact: pp mm
+2025-02-28 11:15:04,899 - INFO - Displayed contact: David Brown
+2025-02-28 11:15:04,899 - INFO - Displayed contact: Alice Smith
+2025-02-28 11:15:04,900 - INFO - Displayed contact: Eve Adams
+2025-02-28 11:15:04,901 - INFO - Displayed contact: Bob Johnson
+2025-02-28 11:16:16,203 - INFO - Saved c1 to c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\book.txt
+2025-02-28 11:16:21,212 - INFO - Displayed contact: Carol Williams
+2025-02-28 11:16:21,213 - INFO - Displayed contact: pp mm
+2025-02-28 11:16:21,213 - INFO - Displayed contact: David Brown
+2025-02-28 11:16:21,214 - INFO - Displayed contact: Alice Smith
+2025-02-28 11:16:21,214 - INFO - Displayed contact: Eve Adams
+2025-02-28 11:16:21,215 - INFO - Displayed contact: Bob Johnson
