@@ -1,8 +1,10 @@
 import re
 import logging
 import os
+import csv
 from collections import Counter
 
+# Setup logging configuration
 current_directory = os.path.dirname(os.path.abspath(__file__))
 os.makedirs(current_directory, exist_ok=True)
 log_file_path = os.path.join(current_directory, "address_book.log")
@@ -10,8 +12,8 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(log_file_path),  # Save logs in the current directory
-        logging.StreamHandler()  # Also print logs in the console
+        logging.FileHandler(log_file_path),
+        logging.StreamHandler()
     ]
 )
 
@@ -19,21 +21,21 @@ logging.info("Address Book System - Logging started.")
 
 class Contact:
     """
-    Description:
     Represents a contact in an address book with personal details.
     """
+
     def __init__(self, first_name, last_name, phone, email, address, city, state, zip_code):
         """
         Initializes a new Contact object with the given details.
-        Parameters:
-            first_name (str): The first name of the contact.
-            last_name (str): The last name of the contact.
-            phone (str): The contact's phone number (10 or 12 digits).
-            email (str): The contact's email address.
-            address (str): The contact's street address.
-            city (str): The city where the contact resides.
-            state (str): The state where the contact resides.
-            zip_code (str): The postal ZIP code (must be exactly 6 digits).
+        :param first_name: First name of the contact.
+        :param last_name: Last name of the contact.
+        :param phone: Contact's phone number (10 or 12 digits).
+        :param email: Contact's email address.
+        :param address: Contact's street address.
+        :param city: City where the contact resides.
+        :param state: State where the contact resides.
+        :param zip_code: Postal ZIP code (must be exactly 6 digits).
+        :raises ValueError: If any of the input data is invalid.
         """
         if not first_name or not last_name:
             raise ValueError("First name and last name cannot be empty.")
@@ -56,47 +58,44 @@ class Contact:
 
     def __hash__(self):
         """
-        Description:
-            Defines a unique hash for a contact based on its first and last names.        
-        Returns:
-            int: Hash of the contact's first and last names.
+        Returns a unique hash for the contact based on its first and last names.
+        :return: Hash of the contact's first and last names.
         """
         return hash((self.first_name.lower(), self.last_name.lower()))
     
     def __str__(self):
         """
-        Description:
-            Returns a formatted string representation of the contact.
-        Returns:
-            str: Formatted contact details.
+        Returns a formatted string representation of the contact.
+        :return: Formatted contact details.
         """
         return f"{self.first_name} {self.last_name} | {self.phone} | {self.email} | {self.address}, {self.city}, {self.state} {self.zip_code}"
 
+
 class AddressBook:
     """
-    Description:
     Represents an address book that stores multiple contacts.
     """
+
     def __init__(self, book_name):
+        """
+        Initializes a new AddressBook object with the given name.
+        :param book_name: Name of the address book.
+        """
         self.book_name = book_name
         self.contacts = set()
         logging.info(f"Address Book '{book_name}' created.")
 
     def add_contact(self, first_name, last_name, phone, email, address, city, state, zip_code):
         """
-        Description:
-            Adds a new contact to the address book if it does not already exist.
-        Parameters:
-            first_name - First name of the contact.
-            last_name -Last name of the contact.
-            phone - Phone number.
-            email - Email address.
-            address - Street address.
-            city - City.
-            state - State.
-            zip_code - 6-digit postal code.
-        Returns:
-            None
+        Adds a new contact to the address book if it does not already exist.
+        :param first_name: First name of the contact.
+        :param last_name: Last name of the contact.
+        :param phone: Phone number of the contact.
+        :param email: Email address of the contact.
+        :param address: Street address of the contact.
+        :param city: City of the contact.
+        :param state: State of the contact.
+        :param zip_code: 6-digit postal code of the contact.
         """
         try:
             contact = Contact(first_name, last_name, phone, email, address, city, state, zip_code)
@@ -112,10 +111,7 @@ class AddressBook:
 
     def display_contacts(self):
         """
-        Description:
-            Displays all contacts in the address book.
-        Returns:
-            None
+        Displays all contacts in the address book.
         """
         if not self.contacts:
             print(f"{self.book_name} Address Book is empty.")
@@ -128,18 +124,13 @@ class AddressBook:
 
     def display_contacts_sorted_by_name(self):
         """
-        Description:
-            Displays all contacts in the address book sorted alphabetically by name (first then last).
-        Returns:
-            None
+        Displays all contacts in the address book sorted alphabetically by name.
         """
         if not self.contacts:
             print(f"{self.book_name} Address Book is empty.")
             logging.info(f"{self.book_name} Address Book is empty.")
             return
-        
-        # Sort contacts by first name then last name
-        sorted_contacts = sorted(self.contacts, key=lambda contact: (contact.first_name.lower(), contact.last_name.lower()))
+        sorted_contacts = sorted(self.contacts, key=lambda c: (c.first_name.lower(), c.last_name.lower()))
         print(f"\nContacts in {self.book_name} (Sorted by Name):")
         for contact in sorted_contacts:
             print(contact)
@@ -147,18 +138,13 @@ class AddressBook:
 
     def display_contacts_sorted_by_zip(self):
         """
-        Description:
-            Displays all contacts in the address book sorted by ZIP code.
-        Returns:
-            None
+        Displays all contacts in the address book sorted by ZIP code.
         """
         if not self.contacts:
             print(f"{self.book_name} Address Book is empty.")
             logging.info(f"{self.book_name} Address Book is empty.")
             return
-        
-        # Sort contacts by ZIP code
-        sorted_contacts = sorted(self.contacts, key=lambda contact: contact.zip_code)
+        sorted_contacts = sorted(self.contacts, key=lambda c: c.zip_code)
         print(f"\nContacts in {self.book_name} (Sorted by ZIP):")
         for contact in sorted_contacts:
             print(contact)
@@ -166,19 +152,15 @@ class AddressBook:
 
     def edit_contact(self, first_name, last_name, updated_contact):
         """
-        Description:
-            Edits an existing contact in the address book.
-        Parameters:
-            first_name (str): First name of the contact to be edited.
-            last_name (str): Last name of the contact to be edited.
-            updated_contact (Contact): Updated contact object.
-        Returns:
-            None
+        Edits an existing contact in the address book.
+        :param first_name: First name of the contact to be edited.
+        :param last_name: Last name of the contact to be edited.
+        :param updated_contact: Updated contact object.
         """
         try:
             for contact in self.contacts:
                 if (contact.first_name.lower() == first_name.lower() and 
-                    contact.last_name.lower() == last_name.lower()):
+                        contact.last_name.lower() == last_name.lower()):
                     self.contacts.remove(contact)
                     self.contacts.add(updated_contact)
                     logging.info(f"Contact '{first_name} {last_name}' updated successfully!")
@@ -192,18 +174,14 @@ class AddressBook:
 
     def delete_contact(self, first_name, last_name):
         """
-        Description:
-            Deletes a contact from the address book.
-        Parameters:
-            first_name - First name of the contact to be deleted.
-            last_name - Last name of the contact to be deleted.
-        Returns:
-            None
+        Deletes a contact from the address book.
+        :param first_name: First name of the contact to be deleted.
+        :param last_name: Last name of the contact to be deleted.
         """
         try:
             for contact in self.contacts:
                 if (contact.first_name.lower() == first_name.lower() and 
-                    contact.last_name.lower() == last_name.lower()):
+                        contact.last_name.lower() == last_name.lower()):
                     self.contacts.remove(contact)
                     logging.info(f"Contact '{first_name} {last_name}' deleted successfully!")
                     print(f"Contact '{first_name} {last_name}' has been deleted.")
@@ -216,21 +194,16 @@ class AddressBook:
 
     def save_to_file(self, filename):
         """
-        Description:
-            Saves all contacts in the address book to a specified file.
-        Parameters:
-            self, filename
-        Returns:
-            None
+        Saves all contacts in the address book to a specified text file.
+        :param filename: Name of the file to save the contacts.
         """
         try:
-            # Construct full file path
             file_path = os.path.join(current_directory, filename)
-            # Ensure the directory exists
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
             with open(file_path, 'w') as file:
                 for contact in self.contacts:
-                    line = f"{contact.first_name},{contact.last_name},{contact.phone},{contact.email},{contact.address},{contact.city},{contact.state},{contact.zip_code}\n"
+                    line = f"{contact.first_name},{contact.last_name},{contact.phone},{contact.email}," \
+                           f"{contact.address},{contact.city},{contact.state},{contact.zip_code}\n"
                     file.write(line)
             logging.info(f"Saved {self.book_name} to {file_path}")
             print(f"Address Book '{self.book_name}' saved to {file_path}.")
@@ -240,12 +213,8 @@ class AddressBook:
 
     def load_from_file(self, filename):
         """
-        Description:
-            Loads contacts from a specified file into the address book.
-        Parameters:
-            self, filename
-        Returns:
-            None
+        Loads contacts from a specified text file into the address book.
+        :param filename: Name of the file to load the contacts from.
         """
         try:
             file_path = os.path.join(current_directory, filename)
@@ -266,25 +235,75 @@ class AddressBook:
             logging.error(f"Error loading from file {file_path}: {e}")
             print(f"Error loading from file: {e}")
 
+    def save_to_csv(self, filename):
+        """
+        Saves all contacts in the address book to a specified CSV file.
+        :param filename: Name of the CSV file to save the contacts.
+        """
+        try:
+            file_path = os.path.join(current_directory, filename)
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+            with open(file_path, 'w', newline='') as csvfile:
+                fieldnames = ['First Name', 'Last Name', 'Phone', 'Email', 'Address', 'City', 'State', 'ZIP Code']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                for contact in self.contacts:
+                    writer.writerow({
+                        'First Name': contact.first_name,
+                        'Last Name': contact.last_name,
+                        'Phone': contact.phone,
+                        'Email': contact.email,
+                        'Address': contact.address,
+                        'City': contact.city,
+                        'State': contact.state,
+                        'ZIP Code': contact.zip_code
+                    })
+            logging.info(f"Saved {self.book_name} to {file_path}")
+            print(f"Address Book '{self.book_name}' saved to {file_path}.")
+        except Exception as e:
+            logging.error(f"Error saving to CSV file {file_path}: {e}")
+            print(f"Error saving to CSV file: {e}")
+
+    def load_from_csv(self, filename):
+        """
+        Loads contacts from a specified CSV file into the address book.
+        :param filename: Name of the CSV file to load the contacts from.
+        """
+        try:
+            file_path = os.path.join(current_directory, filename)
+            with open(file_path, 'r', newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    self.add_contact(
+                        row['First Name'], row['Last Name'], row['Phone'], row['Email'],
+                        row['Address'], row['City'], row['State'], row['ZIP Code']
+                    )
+            logging.info(f"Loaded {self.book_name} from {file_path}")
+            print(f"Address Book '{self.book_name}' loaded from {file_path}.")
+        except FileNotFoundError:
+            logging.info(f"No CSV file {file_path} found, starting with empty address book.")
+            print(f"No CSV file {file_path} found, starting with empty address book.")
+        except Exception as e:
+            logging.error(f"Error loading from CSV file {file_path}: {e}")
+            print(f"Error loading from CSV file: {e}")
+
+
 class AddressBookSystem:
     """
-    Description:
-        Manages multiple address books.
-    Returns:
-        None
+    Manages multiple address books.
     """
+
     def __init__(self):
+        """
+        Initializes the AddressBookSystem.
+        """
         self.address_books = {}
         logging.info("Address Book System initialized.")
 
     def add_address_book(self, book_name):
         """
-        Description:
-            Retrieves an address book by name.
-        Parameters:
-            self, book_name.
-        Returns:
-            AddressBook: The requested address book or None if not found.
+        Adds a new address book.
+        :param book_name: Name of the address book to add.
         """
         if book_name in self.address_books:
             print(f"Address Book '{book_name}' already exists!")
@@ -296,21 +315,15 @@ class AddressBookSystem:
 
     def get_address_book(self, book_name):
         """
-        Description:
-            Retrieves an address book by name.
-        Parameters:
-            self, book_name.
-        Returns:
-            AddressBook: The requested address book or None if not found.
+        Retrieves an address book by name.
+        :param book_name: Name of the address book to retrieve.
+        :return: AddressBook instance or None if not found.
         """
         return self.address_books.get(book_name, None)
 
     def display_all_books(self):
         """
-        Description:
-            Displays all available address books.
-        Returns:
-            None
+        Displays all available address books.
         """
         if not self.address_books:
             print("No Address Books available.")
@@ -323,12 +336,8 @@ class AddressBookSystem:
 
     def search_person_city(self, city=None):
         """
-        Description:
-            Searches for contacts based on city across multiple address books and displays count by city and state.
-        Parameters:
-            self, city 
-        Returns:
-            None
+        Searches for contacts based on city and displays count by city and state.
+        :param city: City to search for.
         """
         if not city:
             print("Please provide a city to search.")
@@ -340,12 +349,15 @@ class AddressBookSystem:
         results = [contact for contact in all_contacts if contact.city.lower() == city.lower()]
         if results:
             print(f"\nSearch Results for City '{city}':")
-            for result in results:
-                print(result)
+            for contact in results:
+                print(contact)
+            logging.info(f"Found {len(results)} contacts in the city '{city}'.")
+
             city_counts = Counter(contact.city.lower() for contact in results)
             print("\nContact Count by City:")
             for city_name, count in city_counts.items():
                 print(f"{city_name}: {count}")
+
             state_counts = Counter(contact.state.lower() for contact in results)
             print("\nContact Count by State:")
             for state_name, count in state_counts.items():
@@ -355,12 +367,8 @@ class AddressBookSystem:
 
     def search_person_state(self, state=None):
         """
-        Description:
-            Searches for contacts based on state across multiple address books and displays count by city and state.
-        Parameters:
-            self, state
-        Returns:
-            None
+        Searches for contacts based on state and displays count by city and state.
+        :param state: State to search for.
         """
         if not state:
             print("Please provide a State to search.")
@@ -372,12 +380,15 @@ class AddressBookSystem:
         results = [contact for contact in all_contacts if contact.state.lower() == state.lower()]
         if results:
             print(f"\nSearch Results for State '{state}':")
-            for result in results:
-                print(result)
+            for contact in results:
+                print(contact)
+            logging.info(f"Found {len(results)} contacts in the state '{state}'.")
+
             city_counts = Counter(contact.city.lower() for contact in results)
             print("\nContact Count by City:")
             for city_name, count in city_counts.items():
                 print(f"{city_name}: {count}")
+
             state_counts = Counter(contact.state.lower() for contact in results)
             print("\nContact Count by State:")
             for state_name, count in state_counts.items():
@@ -387,10 +398,7 @@ class AddressBookSystem:
 
     def count_contacts_by_city_and_state(self):
         """
-        Description:
-            Displays the total count of contacts grouped by city and state across all address books.
-        Returns:
-            None
+        Displays the total count of contacts grouped by city and state.
         """
         all_contacts = [contact for book in self.address_books.values() for contact in book.contacts]
         if not all_contacts:
@@ -400,12 +408,17 @@ class AddressBookSystem:
         print("\nTotal Contact Count by City:")
         for city_name, count in sorted(city_counts.items()):
             print(f"{city_name}: {count}")
+
         state_counts = Counter(contact.state.lower() for contact in all_contacts)
         print("\nTotal Contact Count by State:")
         for state_name, count in sorted(state_counts.items()):
             print(f"{state_name}: {count}")
 
+
 def main():
+    """
+    Main function to execute the Address Book System menu.
+    """
     system = AddressBookSystem()
     while True:
         print("\n1. Add Address Book")
@@ -421,7 +434,9 @@ def main():
         print("11. Display Contacts Sorted by ZIP")
         print("12. Save Address Book to File")
         print("13. Load Address Book from File")
-        print("14. Exit")
+        print("14. Save Address Book to CSV")
+        print("15. Load Address Book from CSV")
+        print("16. Exit")
         choice = input("Enter your choice: ").strip()
         if choice == "1":
             book_name = input("Enter Address Book name: ").strip()
@@ -516,10 +531,27 @@ def main():
             else:
                 print(f"Address Book '{book_name}' does not exist!")
         elif choice == "14":
+            book_name = input("Enter Address Book name: ").strip()
+            address_book = system.get_address_book(book_name)
+            if address_book:
+                filename = input("Enter CSV filename to save to (e.g., 'book.csv'): ").strip()
+                address_book.save_to_csv(filename)
+            else:
+                print(f"Address Book '{book_name}' does not exist!")
+        elif choice == "15":
+            book_name = input("Enter Address Book name: ").strip()
+            address_book = system.get_address_book(book_name)
+            if address_book:
+                filename = input("Enter CSV filename to load from (e.g., 'book.csv'): ").strip()
+                address_book.load_from_csv(filename)
+            else:
+                print(f"Address Book '{book_name}' does not exist!")
+        elif choice == "16":
             print("Exiting...")
             break
         else:
             print("Invalid choice. Please try again.")
+
 
 if __name__ == "__main__":
     main()

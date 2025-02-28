@@ -197,3 +197,15 @@
 2025-02-28 11:16:21,214 - INFO - Displayed contact: Alice Smith
 2025-02-28 11:16:21,214 - INFO - Displayed contact: Eve Adams
 2025-02-28 11:16:21,215 - INFO - Displayed contact: Bob Johnson
+2025-02-28 11:30:32,734 - INFO - Address Book System - Logging started.
+2025-02-28 11:30:32,735 - INFO - Address Book System initialized.
+2025-02-28 11:39:13,411 - INFO - Address Book 'c1' created.
+2025-02-28 11:39:13,421 - INFO - Address Book 'c1' created.
+2025-02-28 11:39:26,947 - INFO - Address Book System - Logging started.
+2025-02-28 11:39:26,948 - INFO - Address Book System initialized.
+2025-02-28 11:39:38,818 - INFO - Address Book 'c1' created.
+2025-02-28 11:39:38,819 - INFO - Address Book 'c1' created.
+2025-02-28 11:40:05,234 - INFO - Contact created: prikshit marrhia
+2025-02-28 11:40:05,235 - INFO - Contact 'prikshit marrhia' added to c1.
+2025-02-28 11:40:16,001 - INFO - Saved c1 to c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\book.txt
+2025-02-28 11:40:28,434 - INFO - Saved c1 to c:\Users\Prikshit\OneDrive\Desktop\Address_book_problem\Address-Book-Prblm\book.csv
