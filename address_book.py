@@ -134,7 +134,7 @@ def main():
         print("2. Display Contacts")
         print("3. Exit")
 
-            choice = input("Enter your choice: ").strip()
+        choice = input("Enter your choice: ").strip()
 
         if choice == "1":
             contact = AddressBookApp.create_contact()
