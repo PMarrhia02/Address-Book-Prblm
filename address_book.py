@@ -16,41 +16,39 @@ logging.basicConfig(
 logging.info("Address Book Program - Logging started.")
 
 
-class Contact:
+class ContactPerson:
     """
-    A class to represent a contact with validation.
+    Represents a contact person with validated personal details.
     """
+    EMAIL_REGEX = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 
     def __init__(self, first_name, last_name, address, city, state, zip_code, phone, email):
+        try:
+            self.validate_inputs(first_name, last_name, zip_code, phone, email)
+            self.first_name = first_name
+            self.last_name = last_name
+            self.address = address
+            self.city = city
+            self.state = state
+            self.zip_code = zip_code
+            self.phone = phone
+            self.email = email
+            logging.info(f"Contact created: {self.first_name} {self.last_name}")
+        except ValueError as e:
+            logging.error(f"Error creating contact: {e}")
+            raise
+
+    @staticmethod
+    def validate_inputs(first_name, last_name, zip_code, phone, email):
+        """ Validates the input data for a contact person. """
         if not first_name or not last_name:
             raise ValueError("First and last name cannot be empty.")
-
-        if not re.match(r"^\d{6}$", zip_code):
-            raise ValueError("Invalid ZIP code! It must be a 6-digit number.")
-
-        if not re.match(r"^\d{10,12}$", phone):
-            raise ValueError("Invalid phone number! It must be 10 or 12 digits.")
-
-        if not re.match(r"^[\w\.-]+@[\w\.-]+\.\w{2,}$", email):
-            raise ValueError("Invalid email format! Example: name@example.com")
-
-        self.first_name = first_name
-        self.last_name = last_name
-        self.address = address
-        self.city = city
-        self.state = state
-        self.zip_code = zip_code
-        self.phone = phone
-        self.email = email
-
-    def update_details(self, address, city, state, zip_code, phone, email):
-        """Update the details of an existing contact."""
-        self.address = address
-        self.city = city
-        self.state = state
-        self.zip_code = zip_code
-        self.phone = phone
-        self.email = email
+        if not isinstance(zip_code, int) or not re.fullmatch(r"\d{6}", str(zip_code)):
+            raise ValueError("ZIP code must be a 6-digit number.")
+        if not isinstance(phone, int) or not re.fullmatch(r"\d{10,12}", str(phone)):
+            raise ValueError("Phone number must be 10 or 12 digits long.")
+        if not re.match(ContactPerson.EMAIL_REGEX, email):
+            raise ValueError("Invalid email format.")
 
     def __str__(self):
         return (f"Name: {self.first_name} {self.last_name}\n"
@@ -58,140 +56,122 @@ class Contact:
                 f"Phone: {self.phone}\n"
                 f"Email: {self.email}\n")
 
-
 class AddressBook:
     """
-    A class to manage multiple contacts in an address book.
+    Manages multiple contact entries in an address book.
     """
-
     def __init__(self):
         self.contacts = {}
+        logging.info("Address book initialized.")
 
     def add_contact(self, contact):
-        if not isinstance(contact, Contact):
-            raise TypeError("Invalid contact type. Must be a Contact instance.")
+        """ Adds a new contact to the address book. """
+        try:
+            if not isinstance(contact, ContactPerson):
+                raise TypeError("Invalid contact type. Must be a ContactPerson instance.")
+            full_name = f"{contact.first_name} {contact.last_name}"
+            if full_name in self.contacts:
+                logging.warning(f"Contact '{full_name}' already exists.")
+            else:
+                self.contacts[full_name] = contact
+                logging.info(f"Contact '{full_name}' added successfully!")
+        except Exception as e:
+            logging.error(f"Error adding contact: {e}")
 
-        full_name = f"{contact.first_name} {contact.last_name}"
-        if full_name in self.contacts:
-            logging.warning(f"Attempted to add duplicate contact: {full_name}")
-            print(f"Contact '{full_name}' already exists!")
-        else:
-            self.contacts[full_name] = contact
-            logging.info(f"Contact added: {full_name}")
-            print(f"\nContact '{full_name}' added successfully!\n")
+    def edit_contact(self, name, updated_contact):
+        """ Edits an existing contact in the address book. """
+        try:
+            if name in self.contacts:
+                self.contacts[name] = updated_contact
+                logging.info(f"Contact '{name}' updated successfully!")
+            else:
+                logging.warning(f"Contact '{name}' not found in the address book.")
+        except Exception as e:
+            logging.error(f"Error editing contact: {e}")
 
     def display_contacts(self):
-        if not self.contacts:
-            logging.info("Displayed Address Book: Empty")
-            print("\nAddress Book is empty!\n")
-        else:
-            logging.info("Displayed Address Book Contacts")
-            print("\nYour Address Book:")
-            for contact in self.contacts.values():
-                print(contact)
+        """ Displays all contacts in the address book. """
+        try:
+            if not self.contacts:
+                logging.info("Address book is empty.")
+                print("\nAddress Book is empty!\n")
+            else:
+                for contact in self.contacts.values():
+                    print(contact)
+                    logging.info(f"Displayed contact: {contact.first_name} {contact.last_name}")
+        except Exception as e:
+            logging.error(f"Error displaying contacts: {e}")
 
-    def edit_contact(self, full_name):
-        """Edit an existing contact's details."""
-        if full_name in self.contacts:
-            contact = self.contacts[full_name]
-            print(f"\nEditing Contact: {full_name}")
-
-            contact.address = input("Enter New Address: ").strip()
-            contact.city = input("Enter New City: ").strip()
-            contact.state = input("Enter New State: ").strip()
-
-            contact.zip_code = AddressBookApp.get_validated_input(
-                "Enter New ZIP Code (6 digits): ",
-                r"^\d{6}$", "Invalid ZIP Code! Must be 6 digits."
-            )
-            contact.phone = AddressBookApp.get_validated_input(
-                "Enter New Phone Number (10 or 12 digits): ",
-                r"^\d{10,12}$", "Invalid Phone Number! Must be 10 or 12 digits."
-            )
-            contact.email = AddressBookApp.get_validated_input(
-                "Enter New Email: ",
-                r"^[\w\.-]+@[\w\.-]+\.\w{2,}$", "Invalid Email! Please enter a valid email."
-            )
-
-            logging.info(f"Contact updated: {full_name}")
-            print(f"\nContact '{full_name}' updated successfully!\n")
-        else:
-            logging.warning(f"Attempted to edit non-existent contact: {full_name}")
-            print(f"\nContact '{full_name}' not found in Address Book!\n")
-
-
-class AddressBookApp:
-    """
-    Main application interface for user interaction.
-    """
-
+class AddressBookMain:
+    """ Provides the main interface for the address book system. """
     @staticmethod
     def get_validated_input(prompt, pattern, error_message):
+        """ Gets validated user input based on a regex pattern. """
         while True:
-            user_input = input(prompt).strip()
-            if re.match(pattern, user_input):
-                return user_input
-            print(error_message)
-            logging.error(f"Invalid input: {user_input}")
+            try:
+                user_input = input(prompt).strip()
+                if re.fullmatch(pattern, user_input):
+                    return user_input
+                logging.warning(error_message)
+                print(error_message)
+            except Exception as e:
+                logging.error(f"Unexpected error: {e}")
+                print(f"Unexpected error: {e}")
 
     @staticmethod
     def create_contact():
+        """ Collects user input and creates a new contact. """
         try:
             first_name = input("Enter First Name: ").strip()
             last_name = input("Enter Last Name: ").strip()
             address = input("Enter Address: ").strip()
             city = input("Enter City: ").strip()
             state = input("Enter State: ").strip()
-            zip_code = AddressBookApp.get_validated_input(
-                "Enter ZIP Code (6 digits): ",
-                r"^\d{6}$", "Invalid ZIP Code! Must be 6 digits."
-            )
-            phone = AddressBookApp.get_validated_input(
-                "Enter Phone Number (10 or 12 digits): ",
-                r"^\d{10,12}$", "Invalid Phone Number! Must be 10 or 12 digits."
-            )
-            email = AddressBookApp.get_validated_input(
-                "Enter Email: ",
-                r"^[\w\.-]+@[\w\.-]+\.\w{2,}$", "Invalid Email! Please enter a valid email."
-            )
 
-            return Contact(first_name, last_name, address, city, state, zip_code, phone, email)
-        except ValueError as e:
+            zip_code = AddressBookMain.get_validated_input("Enter ZIP Code (6 digits): ", r"\d{6}", "Invalid ZIP Code! It must be a 6-digit number.")
+            phone = AddressBookMain.get_validated_input("Enter Phone Number (10 or 12 digits): ", r"\d{10,12}", "Invalid Phone Number! It must be 10 or 12 digits long.")
+            email = AddressBookMain.get_validated_input("Enter Email: ", ContactPerson.EMAIL_REGEX, "Invalid Email! Please enter a valid email address.")
+
+            return ContactPerson(first_name, last_name, address, city, state, int(zip_code), int(phone), email)
+        except Exception as e:
             logging.error(f"Error creating contact: {e}")
-            print(f"Error: {e}")
             return None
 
-
 def main():
-    print("\nWelcome to the Address Book System!\n")
+    """ Entry point of the program. Manages address book operations. """
+    logging.info("Address Book Application Started")
     address_book = AddressBook()
 
     while True:
-        print("\nMenu:")
-        print("1. Add Contact")
-        print("2. Display Contacts")
-        print("3. Edit Contact")
-        print("4. Exit")
+        try:
+            print("\nMenu:")
+            print("1. Add Contact")
+            print("2. Display Contacts")
+            print("3. Edit Contact")
+            print("4. Exit")
+            choice = input("Enter your choice: ").strip()
 
-        choice = input("Enter your choice: ").strip()
-
-        if choice == "1":
-            contact = AddressBookApp.create_contact()
-            if contact:
-                address_book.add_contact(contact)
-        elif choice == "2":
-            address_book.display_contacts()
-        elif choice == "3":
-            full_name = input("Enter Full Name of the Contact to Edit: ").strip()
-            address_book.edit_contact(full_name)
-        elif choice == "4":
-            logging.info("Exiting Address Book Application.")
-            print("\nExiting Address Book. Goodbye!\n")
-            break
-        else:
-            logging.warning(f"Invalid menu choice: {choice}")
-            print("Invalid choice! Please select a valid option.")
-
+            if choice == "1":
+                contact = AddressBookMain.create_contact()
+                if contact:
+                    address_book.add_contact(contact)
+            elif choice == "2":
+                address_book.display_contacts()
+            elif choice == "3":
+                name = input("Enter full name of the contact to edit: ").strip()
+                updated_contact = AddressBookMain.create_contact()
+                if updated_contact:
+                    address_book.edit_contact(name, updated_contact)
+            elif choice == "4":
+                logging.info("Exiting Address Book. Goodbye!")
+                print("\nExiting Address Book. Goodbye!\n")
+                break
+            else:
+                logging.warning("Invalid choice! Please select a valid option.")
+                print("Invalid choice! Please select a valid option.")
+        except Exception as e:
+            logging.critical(f"Unexpected error: {e}")
 
 if __name__ == "__main__":
     main()
+    
