@@ -2,3 +2,7 @@
 2025-02-24 22:51:31,024 - ERROR - Invalid Email: p@gmail,com
 2025-02-24 23:09:02,239 - INFO - Address Book Program - Logging started.
 2025-02-24 23:09:42,436 - INFO - Contact added: pp kk
+2025-03-02 19:26:13,102 - INFO - Address Book System - Logging started.
+2025-03-02 19:27:06,999 - INFO - Contact created: Prikshit Marrhia
+2025-03-02 19:27:06,999 - INFO - Contact 'Prikshit Marrhia' added successfully
+2025-03-02 19:27:09,857 - INFO - Displaying all contacts
